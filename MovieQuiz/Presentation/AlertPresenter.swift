@@ -13,8 +13,8 @@ final class AlertPresenter {
             result.completion()
         }
         
+        alert.view.accessibilityIdentifier = "Game results"
         alert.addAction(alertAction)
-        
         delegate?.didReceiveAlert(alert: alert)
     }
 }
