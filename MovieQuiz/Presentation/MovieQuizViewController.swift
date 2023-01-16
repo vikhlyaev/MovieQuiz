@@ -16,7 +16,7 @@ final class MovieQuizViewController: UIViewController {
     private var questionFactory: QuestionFactoryProtocol?
     
     private var alertPresenter: AlertPresenter?
-    private var statisticService: StatisticService?
+    private var statisticService: StatisticServiceProtocol?
     private var moviesLoader: MoviesLoading = MoviesLoader()
     
     // MARK: - Lifecycle
@@ -33,7 +33,7 @@ final class MovieQuizViewController: UIViewController {
         alertPresenter = AlertPresenter()
         alertPresenter?.delegate = self
         
-        statisticService = StatisticServiceImplementation()
+        statisticService = StatisticService()
         
         questionFactory?.loadData()
         showLoadingIndicator()
