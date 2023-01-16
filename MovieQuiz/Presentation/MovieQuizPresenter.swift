@@ -2,11 +2,11 @@ import UIKit
 
 final class MovieQuizPresenter {
     
+    weak var viewController: MovieQuizViewController?
+    
     private var currentQuestionIndex = 0
-    weak var view: MovieQuizViewController?
     var currentQuestion: QuizQuestion?
     let questionsAmount = 10
-    
     
     func convert(model: QuizQuestion) -> QuizStepViewModel {
         QuizStepViewModel(image: UIImage(data: model.image) ?? UIImage(),
@@ -27,11 +27,23 @@ final class MovieQuizPresenter {
     }
     
     func yesButtonClicked() {
-        view?.showAnswerResult(isCorrect: currentQuestion?.correctAnswer == true)
+        viewController?.showAnswerResult(isCorrect: currentQuestion?.correctAnswer == true)
     }
     
     func noButtonClicked() {
-        view?.showAnswerResult(isCorrect: currentQuestion?.correctAnswer == false)
+        viewController?.showAnswerResult(isCorrect: currentQuestion?.correctAnswer == false)
     }
     
+    func didReceiveNextQuestion(question: QuizQuestion?) {
+        viewController?.hideLoadingIndicator()
+        
+        guard let question = question else { return }
+        currentQuestion = question
+        let viewModel = convert(model: question)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.show(quiz: viewModel)
+        }
+    }
 }
+

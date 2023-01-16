@@ -12,20 +12,18 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     private var correctAnswers = 0
-    private var currentQuestion: QuizQuestion?
     private var questionFactory: QuestionFactoryProtocol?
     
     private var alertPresenter: AlertPresenter?
     private var statisticService: StatisticServiceProtocol?
     private var moviesLoader: MoviesLoading = MoviesLoader()
     
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imageView.layer.cornerRadius = 20
         
-        presenter.view = self
+        presenter.viewController = self
         
         questionFactory = QuestionFactory(moviesLoader: moviesLoader)
         questionFactory?.delegate = self
@@ -40,21 +38,11 @@ final class MovieQuizViewController: UIViewController {
     }
     
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
-        presenter.currentQuestion = currentQuestion
         presenter.yesButtonClicked()
     }
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
-        presenter.currentQuestion = currentQuestion
         presenter.noButtonClicked()
-    }
-    
-    private func showLoadingIndicator() {
-        activityIndicator.startAnimating()
-    }
-    
-    private func hideLoadingIndicator() {
-        activityIndicator.stopAnimating()
     }
     
     private func showNetworkError(message: String) {
@@ -69,7 +57,7 @@ final class MovieQuizViewController: UIViewController {
         alertPresenter?.show(result: alertModel)
     }
     
-    private func show(quiz step: QuizStepViewModel) {
+    func show(quiz step: QuizStepViewModel) {
         imageView.image = step.image
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
@@ -130,6 +118,14 @@ final class MovieQuizViewController: UIViewController {
         
         return "\(currentResult) \n \(numberOfQuizzesPlayed) \n \(record) \n \(accuracy)"
     }
+    
+    func showLoadingIndicator() {
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoadingIndicator() {
+        activityIndicator.stopAnimating()
+    }
 }
 
 // MARK: - QuestionFactoryDelegate
@@ -147,15 +143,7 @@ extension MovieQuizViewController: QuestionFactoryDelegate {
     }
     
     func didReceiveNextQuestion(question: QuizQuestion?) {
-        hideLoadingIndicator()
-        
-        guard let question = question else { return }
-        currentQuestion = question
-        let viewModel = presenter.convert(model: question)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.show(quiz: viewModel)
-        }
+        presenter.didReceiveNextQuestion(question: question)
     }
 }
 
