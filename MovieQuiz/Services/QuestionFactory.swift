@@ -24,9 +24,9 @@ final class QuestionFactory: QuestionFactoryProtocol {
                         let errorDescription = mostPopularMovies.errorMessage
                         self.delegate?.didFailToLoadData(with: errorDescription)
                     }
-                    
                 case .failure(let error):
-                    self.delegate?.didFailToLoadData(with: error)
+                    let errorDescription = error.localizedDescription
+                    self.delegate?.didFailToLoadData(with: errorDescription)
                 }
             }
         }
@@ -35,6 +35,7 @@ final class QuestionFactory: QuestionFactoryProtocol {
     func requestNextQuestion() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
+            
             let index = (0..<self.movies.count).randomElement() ?? 0
             
             guard let movie = self.movies[safe: index] else { return }
@@ -44,10 +45,10 @@ final class QuestionFactory: QuestionFactoryProtocol {
             do {
                 imageData = try Data(contentsOf: movie.resizedImageURL)
             } catch let error {
-                print("Failed to load image")
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.delegate?.didFailToLoadData(with: error)
+                    let errorDescription = error.localizedDescription
+                    self.delegate?.didFailToLoadData(with: errorDescription)
                     return
                 }
             }
