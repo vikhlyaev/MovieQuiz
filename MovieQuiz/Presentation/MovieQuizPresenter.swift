@@ -2,7 +2,7 @@ import UIKit
 
 final class MovieQuizPresenter {
     
-    private weak var viewController: MovieQuizViewController?
+    private weak var viewController: MovieQuizViewControllerProtocol?
     private var questionFactory: QuestionFactoryProtocol?
     private var alertPresenter: AlertPresenterProtocol?
     private var statisticService: StatisticServiceProtocol?
@@ -12,7 +12,7 @@ final class MovieQuizPresenter {
     private var currentQuestion: QuizQuestion?
     private let questionsAmount = 10
     
-    init(viewController: MovieQuizViewController) {
+    init(viewController: MovieQuizViewControllerProtocol) {
         self.viewController = viewController
         
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
@@ -55,7 +55,7 @@ final class MovieQuizPresenter {
             })
             
             let alert = alertPresenter.prepare(model: alertModel)
-            viewController?.present(alert, animated: true)
+            viewController?.present(alert, animated: true, completion: nil)
         } else {
             switchToNextQuestion()
             viewController?.showLoadingIndicator()
@@ -90,10 +90,10 @@ final class MovieQuizPresenter {
         }
         
         let alert = alertPresenter.prepare(model: alertModel)
-        viewController?.present(alert, animated: true)
+        viewController?.present(alert, animated: true, completion: nil)
     }
     
-    private func convert(model: QuizQuestion) -> QuizStepViewModel {
+    func convert(model: QuizQuestion) -> QuizStepViewModel {
         QuizStepViewModel(image: UIImage(data: model.image) ?? UIImage(),
                           question: model.text,
                           questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")

@@ -10,6 +10,7 @@
 		0A383EB629716D47001981EC /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A383EB529716D47001981EC /* ArrayTests.swift */; };
 		0A383EBA297282AF001981EC /* MoviesLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A383EB9297282AF001981EC /* MoviesLoaderTests.swift */; };
 		0A383EC229728E00001981EC /* MovieQuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A383EC129728E00001981EC /* MovieQuizUITests.swift */; };
+		0A5E84CD297653810039D387 /* MovieQuizPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5E84CC297653810039D387 /* MovieQuizPresenterTests.swift */; };
 		0A61C9202958B51D00D77516 /* StatisticServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61C91F2958B51D00D77516 /* StatisticServiceProtocol.swift */; };
 		0A61C9222958B5C400D77516 /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61C9212958B5C400D77516 /* StatisticService.swift */; };
 		0A61C9242958C03500D77516 /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61C9232958C03500D77516 /* GameRecord.swift */; };
@@ -62,6 +63,7 @@
 		0A383EB9297282AF001981EC /* MoviesLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLoaderTests.swift; sourceTree = "<group>"; };
 		0A383EBF29728E00001981EC /* MovieQuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieQuizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A383EC129728E00001981EC /* MovieQuizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizUITests.swift; sourceTree = "<group>"; };
+		0A5E84CC297653810039D387 /* MovieQuizPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizPresenterTests.swift; sourceTree = "<group>"; };
 		0A61C91F2958B51D00D77516 /* StatisticServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticServiceProtocol.swift; sourceTree = "<group>"; };
 		0A61C9212958B5C400D77516 /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
 		0A61C9232958C03500D77516 /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				0A383EB529716D47001981EC /* ArrayTests.swift */,
 				0A383EB9297282AF001981EC /* MoviesLoaderTests.swift */,
+				0A5E84CC297653810039D387 /* MovieQuizPresenterTests.swift */,
 			);
 			path = MovieQuizTests;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A383EB629716D47001981EC /* ArrayTests.swift in Sources */,
+				0A5E84CD297653810039D387 /* MovieQuizPresenterTests.swift in Sources */,
 				0A383EBA297282AF001981EC /* MoviesLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

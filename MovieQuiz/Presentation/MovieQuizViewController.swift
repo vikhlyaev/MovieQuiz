@@ -1,6 +1,6 @@
 import UIKit
 
-protocol MovieQuizViewControllerProtocol {
+protocol MovieQuizViewControllerProtocol: AnyObject {
     func show(quiz step: QuizStepViewModel)
     func highlightImageBorder(isCorrectAnswer: Bool)
     func disableButtons()
@@ -8,6 +8,7 @@ protocol MovieQuizViewControllerProtocol {
     func showLoadingIndicator()
     func hideLoadingIndicator()
     func hideImageViewBorder()
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
 final class MovieQuizViewController: UIViewController, MovieQuizViewControllerProtocol {
