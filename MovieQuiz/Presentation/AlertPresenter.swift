@@ -1,20 +1,29 @@
 import UIKit
 
-final class AlertPresenter {
+protocol AlertPresenterProtocol {
+    func prepare(model: AlertModel) -> UIAlertController
+}
+
+final class AlertPresenter: AlertPresenterProtocol {
     
-    weak var delegate: AlertPresenterDelegate?
-    
-    func show(result: AlertModel) {
-        let alert = UIAlertController(title: result.title,
-                                      message: result.message,
+    func prepare(model: AlertModel) -> UIAlertController {
+        let alert = UIAlertController(title: model.title,
+                                      message: model.message,
                                       preferredStyle: .alert)
         
-        let alertAction = UIAlertAction(title: result.buttonText, style: .default) { _ in 
-            result.completion()
+        let alertAction = UIAlertAction(title: model.buttonText, style: .default) { _ in
+            model.completion()
         }
         
-        alert.view.accessibilityIdentifier = "Game results"
+        switch model.type {
+        case .result:
+            alert.view.accessibilityIdentifier = "Game results"
+        case .error:
+            alert.view.accessibilityIdentifier = "Error"
+        }
+        
         alert.addAction(alertAction)
-        delegate?.didReceiveAlert(alert: alert)
+        
+        return alert
     }
 }
