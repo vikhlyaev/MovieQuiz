@@ -1,7 +1,7 @@
 import Foundation
 
 protocol QuestionFactoryProtocol {
-    var delegate: QuestionFactoryDelegate? { get set }
+    init(moviesLoader: MoviesLoading, delegate: QuestionFactoryDelegate)
     func loadData()
     func requestNextQuestion()
 }
